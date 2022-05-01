@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+
+{% block nav %} {% endblock nav %}
+
+{% block header %}
+    {{ config.title }} | {{ term.name }}
+{% endblock title %}
+
+{% block title %}
+    {{ term.name }}
+{% endblock title %}
+
+{% block content %}
+    {% for page in term.pages %}
+        <article>
+            <header>
+                <h3>
+                    <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+                </h3>
+                {% if page.description %}
+                    <span>
+                        {{ page.description | safe }}
+                    </span>
+                {% endif %}
+                {% if page.extra.duration %}
+                    <span><i class="far fa-clock"></i> {{ page.extra.duration }} Zubereitung</span>
+                {% endif %}
+            </header>
+        </article>
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,50 @@
+@import "helpers";
+@import "variables";
+
+.main-header {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2em;
+    margin-top: 1rem;
+
+    @include tablet-desktop {
+        font-size: 3rem;
+    }
+}
+
+
+h1, h2, h3, h4, h5 {
+    text-align: center;
+    margin-top: $bottom-spacing;
+    margin-bottom: $bottom-spacing;
+
+    .anchor {
+        margin-left: 1rem;
+        visibility: visible;
+        text-decoration: none;
+        cursor: pointer;
+        border-bottom-color: transparent;
+    }
+
+    .anchor:hover {
+        color: $black;
+        background-color: $green;
+    }
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+h2, h3 {
+    font-weight: 600;
+    line-height: 120%;
+}
+
+h3, h4, h5 {
+    margin-bottom: $bottom-spacing/2;
+}

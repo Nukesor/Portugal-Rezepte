@@ -1,0 +1,15 @@
+@import "variables";
+
+.image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: $bottom-spacing;
+    img {
+        max-width: 100%;
+    }
+}
+
+.responsive-picture picture {
+    display: flex;
+    justify-content: center;
+}

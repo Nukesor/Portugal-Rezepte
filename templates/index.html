@@ -1,0 +1,83 @@
+{% import "macro.html" as macro %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block header %}{{ config.title }}{% endblock header %}</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <link rel="stylesheet" href="{{ get_url(path="main.css") | safe }}">
+        <script src="{{ get_url(path="fontawesome.js") | safe }}" async></script>
+    </head>
+
+    <body>
+        <header>
+            <div class="main-header">
+                {% block title %}{{ config.title }}{% endblock title %}
+            </div>
+        </header>
+        <nav>
+            {% block nav %}
+                <div class="navigation-bar">
+                    {% for subsection in section.subsections | sort %}
+                        {% set subsection_item = get_section(path=subsection) %}
+                        <div class="navigation-button">
+                            <a class="navigation-link" href="{{ subsection_item.permalink | safe }}">{{ subsection_item.title  }}</a>
+                        </div>
+                    {% endfor %}
+
+                    <div type="navigation-button" class="icon search"></div>
+                </div>
+                <div class="navigation-bar">
+                    {% for subpage in section.pages %}
+                        <div class="navigation-button">
+                            <a href="{{ subpage.permalink | safe }}">{{ subpage.title  }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="navigation-bar">
+                    <div class="navigation-button">
+                        <a href="/tags">Tags</a>
+                    </div>
+                    <div class="navigation-button">
+                        <a href="/authors">Authors</a>
+                    </div>
+                </div>
+                <hr>
+            {% endblock nav %}
+
+        </nav>
+        <main>
+            {% block search %}
+                <div class="search-container">
+                    <input id="search" type="search" placeholder="Search..">
+                </div>
+
+                <div class="search-results-container">
+                    <div class="search-results-header"></div>
+                    <div class="search-results-items"></div>
+                </div>
+
+                <script src="{{ get_url(path="elasticlunr.min.js") | safe }}"></script>
+                <script src="{{ get_url(path="search_index.en.js") | safe }}"></script>
+                <script src="{{ get_url(path="search.js") | safe }}"></script>
+            {% endblock %}
+            {% block content %}
+                <article>
+                    {{ section.content | safe }}
+                </article>
+            {% endblock content %}
+        </main>
+
+        <footer>
+            <hr>
+            <div class="github-button">
+                <a
+                   href="https://github.com/nukesor/chef-cookbook">
+                    <i class="fab fa-github"></i> View on Github
+                </a>
+            </div>
+        </footer>
+    </body>
+</html>
+

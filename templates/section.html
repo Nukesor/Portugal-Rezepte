@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block header %}
+    {{ config.title }} | {{ section.title }}
+{% endblock title %}
+
+{% block title %}
+    {{ section.title }}
+{% endblock title %}
+
+{% block nav %}
+    {{ macro::navigation(page=section) }}
+{% endblock nav %}
+
+{% block content %}
+    {% if section.subsections %}
+        <div class="navigation-bar">
+            {% for subsection in section.subsections | sort %}
+                {% set subsection_item = get_section(path=subsection) %}
+                <div class="navigation-button">
+                    <a class="navigation-link" href="{{ subsection_item.permalink | safe }}">{{ subsection_item.title  }}</a>
+                </div>
+            {% endfor %}
+
+            <div type="navigation-button" class="icon search"></div>
+        </div>
+    {% endif %}
+    {% if section.pages %}
+        <div class="navigation-bar">
+            {% for subpage in section.pages %}
+                <div class="navigation-button">
+                    <a href="{{ subpage.permalink | safe }}">{{ subpage.title  }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <article>
+        {{ section.content | safe }}
+    </article>
+{% endblock content %}

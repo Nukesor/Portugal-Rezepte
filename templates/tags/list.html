@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block nav %} {% endblock nav %}
+
+{% block header %}
+    {{ config.title }} | Tags
+{% endblock title %}
+
+{% block title %}
+    Tags
+{% endblock title %}
+
+{% block content %}
+    {% if terms %}
+        <ul>
+            {% for term in terms %}
+                <li><a href="{{ term.permalink | safe }}">{{ term.name | capitalize }}</a> ({{ term.pages | length }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock content %}

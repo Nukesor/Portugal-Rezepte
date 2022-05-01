@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block title %}
+    {{ config.title }} | {{ page.title }}
+{% endblock title %}
+
+{% block nav %}
+    {{ macro::navigation(page=page) }}
+{% endblock nav %}
+
+
+{% block content %}
+    <div class="taxonomies">
+        {% if page.taxonomies.authors %}
+            <span> 
+            <i class="far fa-edit"></i> By
+            {% for author in page.taxonomies.authors %}
+                <a href="{{ get_taxonomy_url(kind="authors", name=author) | safe }}" >{{ author }}</a>
+            {% endfor %}
+            </span>
+            <br>
+        {% endif %}
+        {% if page.taxonomies.authors %}
+            {% if page.extra.duration %}
+                <span><i class="far fa-clock"></i> {{ page.extra.duration }} Zubereitung</span>
+            {% endif %}
+            <br>
+        {% endif %}
+        {% if page.taxonomies.tags %}
+            <span>
+            <i class="fas fa-tags"></i>
+            {% for tag in page.taxonomies.tags %}
+                <a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}" >
+                    {{ tag }},
+                </a>
+            {% endfor %}
+            </span>
+        {% endif %}
+    </div>
+    <article>
+        {{ page.content | safe }}
+    </article>
+{% endblock content %}
